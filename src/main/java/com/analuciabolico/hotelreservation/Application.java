@@ -21,7 +21,7 @@ public class Application {
 		input = keyboard.nextLine();
 
 		System.out.println("BEST HOTEL AND CHEAPEST:");
-		System.err.println(service.response(input));
+		System.out.println(service.response(input));
 	}
 
 }

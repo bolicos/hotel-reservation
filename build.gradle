@@ -7,6 +7,20 @@ plugins {
 group = 'com.analuciabolico'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+sourceCompatibility = 11
+targetCompatibility = 11
+
+task fatJar(type: Jar) {
+	manifest {
+		attributes  'Implementation-Title': 'Gradle Jar File Example',
+					'Implementation-Version': version,
+					'Main-Class': 'com.analuciabolico.hotelreservation.Application'
+	}
+
+	baseName(project.name + '_' + version)
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
+}
 
 configurations {
 	developmentOnly
