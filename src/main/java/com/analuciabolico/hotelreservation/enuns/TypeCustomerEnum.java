@@ -1,4 +1,4 @@
-package com.analuciabolico.hotelreservation.models;
+package com.analuciabolico.hotelreservation.enuns;
 
 public enum TypeCustomerEnum {
     REGULAR("Regular"), REWARD("Reward");

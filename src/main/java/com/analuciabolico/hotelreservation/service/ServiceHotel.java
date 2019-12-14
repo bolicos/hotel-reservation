@@ -1,13 +1,39 @@
 package com.analuciabolico.hotelreservation.service;
 
-import com.analuciabolico.hotelreservation.data.HotelProjection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceHotel {
 
-    private HotelProjection hotels = new HotelProjection();
-
     public String response(String input) {
+        if(input.contains(":") && input.contains(",")) {
+            List<String> response = transformString(input);
+            String dates = checkDates(input);
+            return checkHotel(input);
+        }
+        return "Invalid Input";
+    }
 
-        return input;
+    private List<String> transformString(String input) {
+        String typeCustomer = input.substring(0, input.indexOf(":"));
+        String dates = input.substring(input.indexOf(":") + 1);
+        List list = new ArrayList<String>();
+        boolean iterator = false;
+
+        list.add(typeCustomer);
+        while (iterator) {
+
+        }
+
+        return list;
+
+    }
+
+    private String checkHotel(String input) {
+        return null;
+    }
+
+    private String checkDates(String input) {
+        return null;
     }
 }
