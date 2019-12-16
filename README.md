@@ -26,7 +26,7 @@ cd hotel-reservation
 > Build project:
 
 ```bash
-gradle buil
+gradle build
 ```
 
 **Step 4:**
