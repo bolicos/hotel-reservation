@@ -46,8 +46,9 @@ test {
 	useJUnitPlatform()
 }
 
-task execute(type: JavaExec) {
+task run(type: JavaExec) {
 	main = mainClass
+	standardInput = System.in
 	classpath = sourceSets.main.runtimeClasspath
 }
 

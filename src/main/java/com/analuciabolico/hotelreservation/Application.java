@@ -13,10 +13,16 @@ import java.util.Scanner;
 @SpringBootApplication
 public class Application {
 	private  static  final  Logger logger = LoggerFactory.getLogger(Application.class);
+	static String input;
+	static Scanner keyboard = new Scanner(System.in);
+
 	public static void main(String[] args) throws Exception {
+		run();
+
+	}
+
+	static void run() throws Exception {
 		IHotelService hotelService = new HotelService(new FeeService(), new ReservationService());
-		Scanner keyboard = new Scanner(System.in);
-		String input;
 
 		logger.info("===========================================");
 		logger.info("===              WELCOME                ===");
@@ -27,6 +33,10 @@ public class Application {
 		input = keyboard.nextLine();
 
 		logger.info(hotelService.getResults(input));
+		keyboard.close();
+		logger.info("===========================================");
+		logger.info("===                 END                 ===");
+		logger.info("===========================================");
 	}
 
 }
