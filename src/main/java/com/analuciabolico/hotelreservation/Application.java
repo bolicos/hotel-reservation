@@ -1,27 +1,33 @@
 package com.analuciabolico.hotelreservation;
 
-import com.analuciabolico.hotelreservation.service.ServiceHotel;
+import com.analuciabolico.hotelreservation.service.FeeService;
+import com.analuciabolico.hotelreservation.service.HotelService;
+import com.analuciabolico.hotelreservation.service.IHotelService;
+import com.analuciabolico.hotelreservation.service.ReservationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Scanner;
 
 @SpringBootApplication
 public class Application {
-	public static void main(String[] args) {
+	private  static  final  Logger logger = LoggerFactory.getLogger(Application.class);
+	public static void main(String[] args) throws Exception {
+		IHotelService hotelService = new HotelService(new FeeService(), new ReservationService());
 		Scanner keyboard = new Scanner(System.in);
-		ServiceHotel service = new ServiceHotel();
 		String input;
 
-		System.out.println("===========================================");
-		System.out.println("===              WELCOME                ===");
-		System.out.println("===========================================");
+		logger.info("===========================================");
+		logger.info("===              WELCOME                ===");
+		logger.info("===========================================");
 
 
-		System.out.println("ENTER CUSTOMER TYPE AND DATES:");
+		logger.info("ENTER CUSTOMER TYPE AND DATES:");
 		input = keyboard.nextLine();
 
-		System.out.println("BEST HOTEL AND CHEAPEST:");
-		System.out.println(service.response(input));
+		logger.info("CHEAPEST HOTEL:");
+		logger.info(hotelService.getResults(input));
 	}
 
 }
