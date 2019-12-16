@@ -1,6 +1,5 @@
 package com.analuciabolico.hotelreservation.service;
 
-import com.analuciabolico.hotelreservation.Application;
 import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

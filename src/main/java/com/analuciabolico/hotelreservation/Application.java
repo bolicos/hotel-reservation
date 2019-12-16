@@ -26,7 +26,6 @@ public class Application {
 		logger.info("ENTER CUSTOMER TYPE AND DATES:");
 		input = keyboard.nextLine();
 
-		logger.info("CHEAPEST HOTEL:");
 		logger.info(hotelService.getResults(input));
 	}
 

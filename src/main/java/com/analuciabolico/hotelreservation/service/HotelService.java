@@ -21,16 +21,14 @@ public class HotelService implements IHotelService {
 
     public String getResults(String input) throws Exception {
         try {
-            if(input.contains(":") && input.contains(",")) {
+            if(input.contains(":")) {
                 TypeCustomerEnum typeCustomer = this.reservationService.getTypeCustomer(input);
                 List<LocalDate> dates = this.reservationService.getDates(input);
                 return this.feeService.hotel(typeCustomer, dates).getName();
             }
             return "Invalid Input";
-        } catch (ParseException | IllegalArgumentException exception) {
+        } catch (ParseException | IllegalArgumentException | StringIndexOutOfBoundsException exception) {
             return exception.getMessage();
         }
     }
-
-
 }

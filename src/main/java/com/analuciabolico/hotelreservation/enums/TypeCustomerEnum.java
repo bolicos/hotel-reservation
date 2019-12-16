@@ -18,6 +18,6 @@ public enum TypeCustomerEnum {
             if (typeCustomerEnum.type.equals(type)) return typeCustomerEnum;
         }
         if (type.isBlank()) type = null;
-        throw new IllegalArgumentException("\nError:\nType of customer not exists -> " + type + "\n");
+        throw new IllegalArgumentException("\nError:\nType of customer not exists -> " + type);
     }
 }
