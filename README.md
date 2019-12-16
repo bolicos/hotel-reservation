@@ -18,7 +18,26 @@
 **Step 2:**
 > Enter in folder of project:
 
-
 ```bash
 cd hotel-reservation
+```
+
+**Step 3:**
+> Build project:
+
+```bash
+gradle buil
+```
+
+**Step 4:**
+> Run project:
+
+```bash
+gradle run
+```
+
+## Tests:
+
+```bash
+gradle test
 ```
