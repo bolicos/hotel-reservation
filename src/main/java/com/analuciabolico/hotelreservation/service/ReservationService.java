@@ -26,15 +26,16 @@ public class ReservationService implements IReservationService {
     public List<LocalDate> getDates(String input) throws ParseException {
         List<LocalDate> dateList = new ArrayList<>();
         String dates = input.substring(input.indexOf(":") + 1);
-        String[] arrayDates = dates.split(Pattern.quote(","));
+        String[] arrayDates = null;
+
+        arrayDates = (dates.contains(",")) ? dates.split(Pattern.quote(",")) : dates.split(Pattern.quote("|_|"));
+
         for(String date : arrayDates){
             Date dateConvert = new SimpleDateFormat("ddMMMyyyy").parse(date);
             LocalDate localDate = dateConvert.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            if (!(localDate.getDayOfWeek().toString().toLowerCase().contains(date.substring(date.indexOf("(") + 1, date.indexOf(")") - 1)))) {
-                logger.warn("Day of week is wrong! For the date -> " + date);
-            }
             dateList.add(localDate);
         }
         return dateList;
+
     }
 }
