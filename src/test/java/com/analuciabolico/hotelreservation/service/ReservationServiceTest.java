@@ -54,13 +54,15 @@ public class ReservationServiceTest {
 
     @Test
     public void getDatesTest() throws ParseException {
-        List<LocalDate> response = reservationService.getDates(input);
+        List<LocalDate> response = new ArrayList<>();
+        response.addAll(reservationService.getDates(input));
         assertEquals(dates, response);
     }
 
     @Test
-    public void getDatesSigularDateTest() throws ParseException {
-        List<LocalDate> response = reservationService.getDates(inputSingularDate);
+    public void getDatesSingularDateTest() throws ParseException {
+        List<LocalDate> response = new ArrayList<>();
+        response.addAll(reservationService.getDates(inputSingularDate));
         assertEquals(date, response);
     }
 
