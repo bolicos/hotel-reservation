@@ -9,13 +9,13 @@ group = 'com.analuciabolico'
 version = '0.0.1'
 
 compileJava {
-   sourceCompatibility = 8
-   targetCompatibility = 8
+   sourceCompatibility = 11
+   targetCompatibility = 11
 }
 
 compileTestJava {
-    sourceCompatibility = 8
-    targetCompatibility = 8
+    sourceCompatibility = 11
+    targetCompatibility = 11
 }
 String mainClass = 'com.analuciabolico.hotelreservation.Application'
 
