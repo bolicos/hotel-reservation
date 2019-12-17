@@ -32,8 +32,8 @@ jobs:
             - v1-dependencies-
 
       - run:
-        - name: dependencies
-        gradle dependencies
+        name: dependencies
+        command: gradle dependencies
 
       - save_cache:
           paths:
@@ -42,5 +42,5 @@ jobs:
 
       # run tests!
       - run:
-        - name: tests
-        gradle test
+        name: tests
+        command: gradle test
