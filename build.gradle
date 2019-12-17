@@ -7,9 +7,16 @@ plugins {
 apply plugin: 'java'
 group = 'com.analuciabolico'
 version = '0.0.1'
-sourceCompatibility = '1.8'
-sourceCompatibility = 11
-targetCompatibility = 11
+
+compileJava {
+   sourceCompatibility = 8
+   targetCompatibility = 8
+}
+
+compileTestJava {
+    sourceCompatibility = 8
+    targetCompatibility = 8
+}
 String mainClass = 'com.analuciabolico.hotelreservation.Application'
 
 def myManifest = manifest {
