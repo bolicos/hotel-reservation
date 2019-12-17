@@ -9,11 +9,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ReservationServiceTest {
@@ -56,14 +56,14 @@ public class ReservationServiceTest {
     public void getDatesTest() throws ParseException {
         List<LocalDate> response = new ArrayList<>();
         response.addAll(reservationService.getDates(input));
-        assertEquals(dates, response);
+        assertIterableEquals(dates, response);
     }
 
     @Test
     public void getDatesSingularDateTest() throws ParseException {
         List<LocalDate> response = new ArrayList<>();
         response.addAll(reservationService.getDates(inputSingularDate));
-        assertEquals(date, response);
+        assertIterableEquals(date, response);
     }
 
     @Test
