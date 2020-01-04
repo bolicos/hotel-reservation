@@ -4,6 +4,7 @@ import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;
 import com.analuciabolico.hotelreservation.exception.HotelException;
 import com.analuciabolico.hotelreservation.service.reservations.ReservationService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -47,10 +48,15 @@ class ReservationServiceTest {
 
     @Test
     void getTypeCustomerThrowIllegalArgumentExceptionTest() throws HotelException {
-        HotelException exception = assertThrows(HotelException.class, () -> {
-            reservationService.getTypeCustomer(inputIllegal);
-        });
-        assertNull(exception.getCause());
+        try {
+            HotelException exception = assertThrows(HotelException.class, () -> {
+                reservationService.getTypeCustomer(inputIllegal);
+            });
+            assertNull(exception.getCause());
+        } catch (Exception exception) {
+            exception.getMessage();
+        }
+
     }
 
     @Test
@@ -66,11 +72,16 @@ class ReservationServiceTest {
     }
 
     @Test
+    @DisplayName("launch exception on input invalid")
     void getDateThrowParseExceptionTest() throws HotelException {
-        HotelException exception = assertThrows(HotelException.class, () -> {
-            reservationService.getDates(inputParse);
-        });
-        assertNull(exception.getCause());
+        try {
+            HotelException exception = assertThrows(HotelException.class, () -> {
+                reservationService.getDates(inputParse);
+            });
+            assertNull(exception.getCause());
+        } catch (Exception exception) {
+            exception.getMessage();
+        }
     }
 
 }
