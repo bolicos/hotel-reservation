@@ -1,6 +1,5 @@
 package com.analuciabolico.hotelreservation;
 
-import com.analuciabolico.hotelreservation.exception.HotelException;
 import com.analuciabolico.hotelreservation.service.fees.FeeService;
 import com.analuciabolico.hotelreservation.service.hotels.HotelService;
 import com.analuciabolico.hotelreservation.service.hotels.IHotelService;
@@ -17,11 +16,11 @@ public class Application {
 	private static Scanner keyboard = new Scanner(System.in);
 	private static final String TEXT = "===========================================";
 
-	public static void main(String[] args) throws HotelException {
+	public static void main(String[] args) {
 		run();
 	}
 
-	static void run() throws HotelException {
+	static void run() {
 		String input;
 		IHotelService hotelService = new HotelService(new FeeService(), new ReservationService());
 		logger.info(TEXT);

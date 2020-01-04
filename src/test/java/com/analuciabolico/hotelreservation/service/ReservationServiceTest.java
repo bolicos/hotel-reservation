@@ -9,7 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,28 +47,30 @@ class ReservationServiceTest {
 
     @Test
     void getTypeCustomerThrowIllegalArgumentExceptionTest() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        HotelException exception = assertThrows(HotelException.class, () -> {
             reservationService.getTypeCustomer(inputIllegal);
         });
+        assertNull(exception.getCause());
     }
 
     @Test
-    void getDatesTest() throws ParseException {
+    void getDatesTest() {
         List<LocalDate> response = new ArrayList<>(reservationService.getDates(input));
         assertIterableEquals(dates, response);
     }
 
     @Test
-    void getDatesSingularDateTest() throws ParseException {
+    void getDatesSingularDateTest() {
         List<LocalDate> response = new ArrayList<>(reservationService.getDates(inputSingularDate));
         assertIterableEquals(date, response);
     }
 
     @Test
     void getDateThrowParseExceptionTest() {
-        assertThrows(HotelException.class, () -> {
+        HotelException exception = assertThrows(HotelException.class, () -> {
             reservationService.getDates(inputParse);
         });
+        assertNull(exception.getCause());
     }
 
 }

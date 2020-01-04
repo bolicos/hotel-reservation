@@ -46,7 +46,7 @@ class HotelServiceTest {
     }
 
     @Test
-    void getResultsTest() throws Exception {
+    void getResultsTest() {
         doReturn(TypeCustomerEnum.REGULAR).when(iReservationService).getTypeCustomer(input);
         doReturn(dates).when(iReservationService).getDates(input);
         when(iFeeService.hotel(TypeCustomerEnum.REGULAR, dates)).thenReturn(HotelEnum.LAKEWOOD);
@@ -57,14 +57,14 @@ class HotelServiceTest {
     }
 
     @Test
-    void getResultsInvalidTest() throws Exception {
+    void getResultsInvalidTest() {
         String response = hotelService.getResults(inputInvalid);
 
         assertEquals("Invalid Input", response);
     }
 
     @Test
-    void getResultsThrowParseTest() throws Exception {
+    void getResultsThrowParseTest() {
         HotelException parseException = mock(HotelException.class);
         String response = "Unparseable date: " + inputParseThrow.substring(inputParseThrow.indexOf(":"), inputParseThrow.indexOf("("));
 

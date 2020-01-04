@@ -16,11 +16,15 @@ import java.util.regex.Pattern;
 public class ReservationService implements IReservationService {
 
     public TypeCustomerEnum getTypeCustomer(String input) {
-        String type = input.substring(0, input.indexOf(":"));
-        return TypeCustomerEnum.isTypeCustomer(type);
+        try {
+            String type = input.substring(0, input.indexOf(":"));
+            return TypeCustomerEnum.isTypeCustomer(type);
+        } catch (Exception exception) {
+            throw new HotelException(exception.getMessage(), exception.getCause());
+        }
     }
 
-    public List<LocalDate> getDates(String input) throws HotelException {
+    public List<LocalDate> getDates(String input) {
         try {
             List<LocalDate> dateList = new ArrayList<>();
             String dates = input.substring(input.indexOf(":") + 1);
