@@ -64,14 +64,14 @@ class ReservationServiceTest {
     @Test
     @DisplayName("input normal case test")
     void getDatesTest() {
-        List<LocalDate> response = new ArrayList<>(reservationService.getDates(input));
+        List<LocalDate> response = reservationService.getDates(input);
         assertIterableEquals(dates, response);
     }
 
     @Test
     @DisplayName("input singular date test")
     void getDatesSingularDateTest() {
-        List<LocalDate> response = new ArrayList<>(reservationService.getDates(inputSingularDate));
+        List<LocalDate> response = reservationService.getDates(inputSingularDate);
         assertIterableEquals(date, response);
     }
 
