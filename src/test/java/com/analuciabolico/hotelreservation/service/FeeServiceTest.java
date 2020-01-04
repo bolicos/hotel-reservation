@@ -2,6 +2,7 @@ package com.analuciabolico.hotelreservation.service;
 
 import com.analuciabolico.hotelreservation.enums.HotelEnum;
 import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;
+import com.analuciabolico.hotelreservation.service.fees.FeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,19 +16,19 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class FeeServiceTest {
+class FeeServiceTest {
 
     @InjectMocks
     FeeService feeService;
 
-    List<LocalDate> dates = new ArrayList<>();
-    List<LocalDate> datesEndsWeek = new ArrayList<>();
-    List<LocalDate> datesStarHotel = new ArrayList<>();
-    TypeCustomerEnum regular = TypeCustomerEnum.REGULAR;
-    TypeCustomerEnum reward = TypeCustomerEnum.REWARD;
+    private List<LocalDate> dates = new ArrayList<>();
+    private List<LocalDate> datesEndsWeek = new ArrayList<>();
+    private List<LocalDate> datesStarHotel = new ArrayList<>();
+    private TypeCustomerEnum regular = TypeCustomerEnum.REGULAR;
+    private TypeCustomerEnum reward = TypeCustomerEnum.REWARD;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         dates.add(LocalDate.of(2019, 12, 16));
         dates.add(LocalDate.of(2019, 12, 17));
 
@@ -42,25 +43,25 @@ public class FeeServiceTest {
     }
 
     @Test
-    public void hotelTest() {
+    void hotelTest() {
         HotelEnum hotel = feeService.hotel(regular, dates);
         assertEquals(HotelEnum.LAKEWOOD, hotel);
     }
 
     @Test
-    public void calculateLowestPriceTest() {
+    void calculateLowestPriceTest() {
         HotelEnum hotel = feeService.hotel(regular, dates);
         assertEquals(HotelEnum.LAKEWOOD, hotel);
     }
 
     @Test
-    public void calculateLowestPriceEndsWeekTest() {
+    void calculateLowestPriceEndsWeekTest() {
         HotelEnum hotel = feeService.hotel(regular, datesEndsWeek);
         assertEquals(HotelEnum.BRIDGWOOD, hotel);
     }
 
     @Test
-    public void calculateLowestPriceStarHotelTest() {
+    void calculateLowestPriceStarHotelTest() {
         HotelEnum hotel = feeService.hotel(reward, datesStarHotel);
         assertEquals(HotelEnum.RIDGEWOOD, hotel);
     }

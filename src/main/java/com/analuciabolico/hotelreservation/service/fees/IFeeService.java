@@ -1,4 +1,4 @@
-package com.analuciabolico.hotelreservation.service;
+package com.analuciabolico.hotelreservation.service.fees;
 
 import com.analuciabolico.hotelreservation.enums.HotelEnum;
 import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;

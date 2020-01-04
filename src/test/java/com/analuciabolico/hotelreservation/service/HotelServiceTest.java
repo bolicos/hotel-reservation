@@ -2,6 +2,10 @@ package com.analuciabolico.hotelreservation.service;
 
 import com.analuciabolico.hotelreservation.enums.HotelEnum;
 import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;
+import com.analuciabolico.hotelreservation.exception.HotelException;
+import com.analuciabolico.hotelreservation.service.fees.IFeeService;
+import com.analuciabolico.hotelreservation.service.hotels.HotelService;
+import com.analuciabolico.hotelreservation.service.reservations.IReservationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,7 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class HotelServiceTest {
+class HotelServiceTest {
 
     @InjectMocks
     HotelService hotelService;
@@ -28,13 +31,13 @@ public class HotelServiceTest {
     @Mock
     IReservationService iReservationService;
 
-    String input;
-    String inputInvalid;
-    String inputParseThrow;
-    List<LocalDate> dates = new ArrayList<>();
+    private String input;
+    private String inputInvalid;
+    private String inputParseThrow;
+    private List<LocalDate> dates = new ArrayList<>();
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         input = "Regular: 16Dez2019(mon), 17Dez2019(tues)";
         inputInvalid = "Regular - 16Dez2019(mon), 17Dez2019(tues)";
         inputParseThrow = "Regular: EEDez2019(mon)";
@@ -43,7 +46,7 @@ public class HotelServiceTest {
     }
 
     @Test
-    public void getResultsTest() throws Exception {
+    void getResultsTest() throws Exception {
         doReturn(TypeCustomerEnum.REGULAR).when(iReservationService).getTypeCustomer(input);
         doReturn(dates).when(iReservationService).getDates(input);
         when(iFeeService.hotel(TypeCustomerEnum.REGULAR, dates)).thenReturn(HotelEnum.LAKEWOOD);
@@ -54,15 +57,15 @@ public class HotelServiceTest {
     }
 
     @Test
-    public void getResultsInvalidTest() throws Exception {
+    void getResultsInvalidTest() throws Exception {
         String response = hotelService.getResults(inputInvalid);
 
         assertEquals("Invalid Input", response);
     }
 
     @Test
-    public void getResultsThrowParseTest() throws Exception {
-        ParseException parseException = mock(ParseException.class);
+    void getResultsThrowParseTest() throws Exception {
+        HotelException parseException = mock(HotelException.class);
         String response = "Unparseable date: " + inputParseThrow.substring(inputParseThrow.indexOf(":"), inputParseThrow.indexOf("("));
 
         doReturn(TypeCustomerEnum.REGULAR).when(iReservationService).getTypeCustomer(inputParseThrow);

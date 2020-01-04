@@ -1,17 +1,18 @@
-package com.analuciabolico.hotelreservation.service;
+package com.analuciabolico.hotelreservation.service.hotels;
 
 import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;
+import com.analuciabolico.hotelreservation.service.fees.IFeeService;
+import com.analuciabolico.hotelreservation.service.reservations.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class HotelService implements IHotelService {
-    IFeeService feeService;
-    IReservationService reservationService;
+    private IFeeService feeService;
+    private IReservationService reservationService;
 
     @Autowired
     public HotelService(IFeeService feeService, IReservationService reservationService) {
@@ -19,7 +20,7 @@ public class HotelService implements IHotelService {
         this.reservationService = reservationService;
     }
 
-    public String getResults(String input) throws Exception {
+    public String getResults(String input) {
         try {
             if(input.contains(":")) {
                 TypeCustomerEnum typeCustomer = this.reservationService.getTypeCustomer(input);
@@ -27,7 +28,7 @@ public class HotelService implements IHotelService {
                 return this.feeService.hotel(typeCustomer, dates).getName();
             }
             return "Invalid Input";
-        } catch (ParseException | IllegalArgumentException | StringIndexOutOfBoundsException exception) {
+        } catch (Exception exception) {
             return exception.getMessage();
         }
     }

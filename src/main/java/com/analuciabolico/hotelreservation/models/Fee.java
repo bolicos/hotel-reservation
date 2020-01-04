@@ -5,12 +5,12 @@ import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;
 
 public class Fee {
     private HotelEnum hotelEnum;
-    private Double fee;
+    private Double feeValue;
     private TypeCustomerEnum typeCustomerEnum;
 
-    public Fee(HotelEnum hotelEnum, Double fee, TypeCustomerEnum typeCustomerEnum) {
+    public Fee(HotelEnum hotelEnum, Double feeValue, TypeCustomerEnum typeCustomerEnum) {
         this.hotelEnum = hotelEnum;
-        this.fee = fee;
+        this.feeValue = feeValue;
         this.typeCustomerEnum = typeCustomerEnum;
     }
 
@@ -18,8 +18,8 @@ public class Fee {
         return hotelEnum;
     }
 
-    public Double getFee() {
-        return fee;
+    public Double getFeeValue() {
+        return feeValue;
     }
 
     public TypeCustomerEnum getTypeCustomerEnum() {

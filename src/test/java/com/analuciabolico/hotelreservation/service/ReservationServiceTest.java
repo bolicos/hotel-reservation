@@ -1,6 +1,8 @@
 package com.analuciabolico.hotelreservation.service;
 
 import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;
+import com.analuciabolico.hotelreservation.exception.HotelException;
+import com.analuciabolico.hotelreservation.service.reservations.ReservationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,27 +11,26 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ReservationServiceTest {
+class ReservationServiceTest {
 
     @InjectMocks
     ReservationService reservationService;
 
-    String input;
-    String inputSingularDate;
-    String inputIllegal;
-    String inputParse;
-    List<LocalDate> dates = new ArrayList<>();
-    List<LocalDate> date = new ArrayList<>();
+    private String input;
+    private String inputSingularDate;
+    private String inputIllegal;
+    private String inputParse;
+    private List<LocalDate> dates = new ArrayList<>();
+    private List<LocalDate> date = new ArrayList<>();
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         input = "Regular: 16Dez2019(mon), 17Dez2019(tues)";
         inputSingularDate = "Regular: 16Dez2019(mon)";
         inputIllegal = "Illegal: 16Dez2019(mon), 17Dez2019(tues)";
@@ -40,35 +41,33 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void getTypeCustomerTest() {
+    void getTypeCustomerTest() {
         TypeCustomerEnum response = reservationService.getTypeCustomer(input);
         assertEquals(TypeCustomerEnum.REGULAR, response);
     }
 
     @Test
-    public void getTypeCustomerThrowIllegalArgumentExceptionTest() {
+    void getTypeCustomerThrowIllegalArgumentExceptionTest() {
         assertThrows(IllegalArgumentException.class, () -> {
             reservationService.getTypeCustomer(inputIllegal);
         });
     }
 
     @Test
-    public void getDatesTest() throws ParseException {
-        List<LocalDate> response = new ArrayList<>();
-        response.addAll(reservationService.getDates(input));
+    void getDatesTest() throws ParseException {
+        List<LocalDate> response = new ArrayList<>(reservationService.getDates(input));
         assertIterableEquals(dates, response);
     }
 
     @Test
-    public void getDatesSingularDateTest() throws ParseException {
-        List<LocalDate> response = new ArrayList<>();
-        response.addAll(reservationService.getDates(inputSingularDate));
+    void getDatesSingularDateTest() throws ParseException {
+        List<LocalDate> response = new ArrayList<>(reservationService.getDates(inputSingularDate));
         assertIterableEquals(date, response);
     }
 
     @Test
-    public void getDateThrowParseExceptionTest() {
-        assertThrows(ParseException.class, () -> {
+    void getDateThrowParseExceptionTest() {
+        assertThrows(HotelException.class, () -> {
             reservationService.getDates(inputParse);
         });
     }

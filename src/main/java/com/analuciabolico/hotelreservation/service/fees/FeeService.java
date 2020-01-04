@@ -1,4 +1,4 @@
-package com.analuciabolico.hotelreservation.service;
+package com.analuciabolico.hotelreservation.service.fees;
 
 import com.analuciabolico.hotelreservation.enums.HotelEnum;
 import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class FeeService implements IFeeService {
 
-    protected static final List<Fee> weekDays = Arrays.asList(
+    private static final List<Fee> weekDays = Arrays.asList(
             new Fee(HotelEnum.LAKEWOOD, 110.00, TypeCustomerEnum.REGULAR),
             new Fee(HotelEnum.LAKEWOOD, 80.00, TypeCustomerEnum.REWARD),
             new Fee(HotelEnum.BRIDGWOOD, 160.00, TypeCustomerEnum.REGULAR),
@@ -22,7 +22,7 @@ public class FeeService implements IFeeService {
             new Fee(HotelEnum.RIDGEWOOD, 220.00, TypeCustomerEnum.REGULAR),
             new Fee(HotelEnum.RIDGEWOOD, 100.00, TypeCustomerEnum.REWARD)
     );
-    protected static final List<Fee> weekEnds = Arrays.asList(
+    private static final List<Fee> weekEnds = Arrays.asList(
             new Fee(HotelEnum.LAKEWOOD, 90.00, TypeCustomerEnum.REGULAR),
             new Fee(HotelEnum.LAKEWOOD, 80.00, TypeCustomerEnum.REWARD),
             new Fee(HotelEnum.BRIDGWOOD, 60.00, TypeCustomerEnum.REGULAR),
@@ -32,14 +32,14 @@ public class FeeService implements IFeeService {
     );
 
     public HotelEnum hotel(TypeCustomerEnum typeCustomer, List<LocalDate> dates) {
-        Map<HotelEnum, Double> hotelInfoDayWeek = new HashMap<>();
-        Map<HotelEnum, Double> hotelInfoEndWeek = new HashMap<>();
+        Map<HotelEnum, Double> hotelInfoDayWeek = new EnumMap<>(HotelEnum.class);
+        Map<HotelEnum, Double> hotelInfoEndWeek = new EnumMap<>(HotelEnum.class);
         List<Integer> days = feeWeek(dates);
         Predicate<Fee> type = fee -> fee.getTypeCustomerEnum().getType().equalsIgnoreCase(typeCustomer.getType());
         List<Fee> dayOfWeek = weekDays.stream().filter(type).collect(Collectors.toList());
         List<Fee> endOfWeek = weekEnds.stream().filter(type).collect(Collectors.toList());
-        dayOfWeek.forEach(fee -> hotelInfoDayWeek.put(fee.getHotelEnum(), (fee.getFee() * days.get(0) )));
-        endOfWeek.forEach(fee -> hotelInfoEndWeek.put(fee.getHotelEnum(), (fee.getFee() * days.get(1) )));
+        dayOfWeek.forEach(fee -> hotelInfoDayWeek.put(fee.getHotelEnum(), (fee.getFeeValue() * days.get(0) )));
+        endOfWeek.forEach(fee -> hotelInfoEndWeek.put(fee.getHotelEnum(), (fee.getFeeValue() * days.get(1) )));
         return calculateLowestPrice(hotelInfoDayWeek, hotelInfoEndWeek);
     }
 
