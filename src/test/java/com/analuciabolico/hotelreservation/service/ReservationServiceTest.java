@@ -46,7 +46,7 @@ class ReservationServiceTest {
     }
 
     @Test
-    void getTypeCustomerThrowIllegalArgumentExceptionTest() {
+    void getTypeCustomerThrowIllegalArgumentExceptionTest() throws HotelException {
         HotelException exception = assertThrows(HotelException.class, () -> {
             reservationService.getTypeCustomer(inputIllegal);
         });
@@ -66,7 +66,7 @@ class ReservationServiceTest {
     }
 
     @Test
-    void getDateThrowParseExceptionTest() {
+    void getDateThrowParseExceptionTest() throws HotelException {
         HotelException exception = assertThrows(HotelException.class, () -> {
             reservationService.getDates(inputParse);
         });
