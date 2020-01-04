@@ -41,12 +41,14 @@ class ReservationServiceTest {
     }
 
     @Test
+    @DisplayName("test capture type customer enum of input ")
     void getTypeCustomerTest() {
         TypeCustomerEnum response = reservationService.getTypeCustomer(input);
         assertEquals(TypeCustomerEnum.REGULAR, response);
     }
 
     @Test
+    @DisplayName("input illegal case test")
     void getTypeCustomerThrowIllegalArgumentExceptionTest() throws HotelException {
         try {
             HotelException exception = assertThrows(HotelException.class, () -> {
@@ -60,12 +62,14 @@ class ReservationServiceTest {
     }
 
     @Test
+    @DisplayName("input normal case test")
     void getDatesTest() {
         List<LocalDate> response = new ArrayList<>(reservationService.getDates(input));
         assertIterableEquals(dates, response);
     }
 
     @Test
+    @DisplayName("input singular date test")
     void getDatesSingularDateTest() {
         List<LocalDate> response = new ArrayList<>(reservationService.getDates(inputSingularDate));
         assertIterableEquals(date, response);

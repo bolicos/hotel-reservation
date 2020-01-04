@@ -39,7 +39,6 @@ class FeeServiceTest {
         datesStarHotel.add(LocalDate.of(2019, 12, 14));
         datesStarHotel.add(LocalDate.of(2019, 12, 13));
         datesStarHotel.add(LocalDate.of(2019, 12, 12));
-
     }
 
     @Test
