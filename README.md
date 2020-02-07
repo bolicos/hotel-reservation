@@ -6,8 +6,6 @@
 * [Gradle 6](https://gradle.org/install/)
 * **Java ->**
 [Java 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
- or
-[Java 8](https://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
 
 
 ### Configs:
