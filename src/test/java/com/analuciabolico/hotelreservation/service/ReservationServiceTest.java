@@ -11,14 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 class ReservationServiceTest {
@@ -75,8 +71,6 @@ class ReservationServiceTest {
     @Test
     @DisplayName("input singular date test")
     void getDatesSingularDateTest() {
-        Date dateMock = mock(Date.class);
-        doReturn(LocalDate.of(2019, 12, 16)).when(dateMock.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         List<LocalDate> response = reservationService.getDates(inputSingularDate);
         assertIterableEquals(date, response);
     }
