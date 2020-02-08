@@ -34,7 +34,7 @@ public class ReservationService implements IReservationService {
 
             for(String date : arrayDates){
                 Date dateConvert = new SimpleDateFormat("ddMMMyyyy").parse(date);
-                LocalDate localDate = dateConvert.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate localDate = new java.sql.Date(dateConvert.getTime()).toLocalDate();
                 dateList.add(localDate);
             }
             return dateList;
