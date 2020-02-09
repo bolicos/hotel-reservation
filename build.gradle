@@ -17,10 +17,11 @@ compileTestJava {
     sourceCompatibility = 11
     targetCompatibility = 11
 }
+
 String mainClass = 'com.analuciabolico.hotelreservation.Application'
 
 def myManifest = manifest {
-	attributes	'Implementation-Title': 'Challenge TW Hotel Reservation',
+	attributes	'Implementation-Title': 'Challenge Hotel Reservation',
 				'Implementation-Version': version,
 				'Main-Class': mainClass
 }
@@ -69,7 +70,11 @@ jar {
 
 task fatJar(type: Jar, group: "build") {
 	manifest = myManifest
-	baseName = project.name + '-all'
+	getArchiveBaseName()
 	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 	with jar
+}
+
+task generateWrapper(type: Wrapper) {
+	gradleVersion = '6.0.1'
 }

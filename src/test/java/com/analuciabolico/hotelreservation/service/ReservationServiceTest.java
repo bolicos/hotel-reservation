@@ -1,5 +1,6 @@
 package com.analuciabolico.hotelreservation.service;
 
+import com.analuciabolico.hotelreservation.BaseUnityTest;
 import com.analuciabolico.hotelreservation.enums.TypeCustomerEnum;
 import com.analuciabolico.hotelreservation.exception.HotelException;
 import com.analuciabolico.hotelreservation.service.reservations.ReservationService;
@@ -17,7 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class ReservationServiceTest {
+class ReservationServiceTest extends BaseUnityTest {
 
     @InjectMocks
     ReservationService reservationService;
